@@ -1,0 +1,27 @@
+{
+  "name": "pollSystem",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx nodemon app.js",
+    "sqlinit": "node mysql.js",
+    "dbinit": "node database.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "moment-timezone": "^0.5.43",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
