@@ -19,12 +19,14 @@ pollRouter.get("/poll", async (req, res) => {
     }
     let response = [];
     for (const poll of polls) {
+      let totalVoteCount = 0;
       const answers = await getAnswers(poll.id);
       for (const answer of answers) {
         const voteCount = await getPollVotes(answer.id);
         answer["voteCount"] = voteCount;
+        totalVoteCount += voteCount;
       }
-      const res = { ...poll, answers: answers };
+      const res = { ...poll, answers: answers, totalVoteCount: totalVoteCount };
       response.push(res);
     }
     res.status(200).send({ polls: response });
@@ -44,11 +46,17 @@ pollRouter.get("/poll/:id", async (req, res) => {
     }
 
     const answers = await getAnswers(poll.id);
+    let totalVoteCount = 0;
     for (const answer of answers) {
       const voteCount = await getPollVotes(answer.id);
       answer["voteCount"] = voteCount;
+      totalVoteCount += voteCount;
     }
-    const resObj = { ...poll, answers: answers };
+    const resObj = {
+      ...poll,
+      answers: answers,
+      totalVoteCount: totalVoteCount,
+    };
 
     res.status(200).send(resObj);
   } catch (error) {
